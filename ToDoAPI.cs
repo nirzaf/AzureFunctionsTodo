@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Azure.Functions.Worker;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EdSmart
 {
-    public static class ToDoAPI
+    public static class ToDoApi
     {
         private static List<Todo> items = new();
 

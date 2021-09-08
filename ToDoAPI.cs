@@ -1,9 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Azure.Functions.Worker;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs.Host;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
-namespace Edsmart
+namespace EdSmart
 {
     public static class ToDoAPI
     {
@@ -13,8 +19,9 @@ namespace Edsmart
         public static async Task<IActionResult> CreateTodo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "todo")]
             HttpRequest req,
-            TraceWriter log)
+            ILogger log)
         {
+            if (log == null) throw new ArgumentNullException(nameof(log));
             log.LogInformation("Creating a new todo list item");
 
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
